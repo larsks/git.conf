@@ -1,0 +1,80 @@
+[alias]
+	ci = commit
+	fix = commit --amend --no-edit
+	update-modified = !git add -u && git fix
+	um = !git update-modified
+	current = rev-parse --short HEAD
+	co = checkout
+	hist = log --pretty=format:'%C(blue)%h%C(reset) %ad | %C(yellow)%<(20,trunc)%ae%C(reset) | %s%d [%an]' --graph --date=short
+	changed = show --name-only
+	branch-name = rev-parse --abbrev-ref --symbolic-full-name HEAD
+	has-changes = diff-index --quiet HEAD --
+	force = push --force-with-lease
+	woo = push --force-with-lease
+	please = push --force-with-lease
+	st = status --short --branch
+	uno = status -uno
+	conflicts = diff --name-only --diff-filter=U
+	tracking = rev-parse --abbrev-ref --symbolic-full-name @{u}
+	last = checkout @{-1}
+	pr = "!if [ $# -eq 1 ]; then set -- origin $1; elif [ $# -ne 2 ]; then echo 'Usage: git pr [<remote>] <pr>'; exit 2; fi; git fetch \"${1}\" \"+pull/${2}/head:pull/${1}/${2}\"; git log -1 \"pull/${1}/${2}\" #"
+	msg = show -s --format=%B
+	sync = push -u origin HEAD
+	body = show --quiet --format=%B
+[user]
+	name = Lars Kellogg-Stedman
+	useConfigOnly = true
+[push]
+	default = simple
+	followTags = true
+[color]
+	ui = auto
+[branch]
+	autosetuprebase = always
+[core]
+	editor = nvim
+	excludesfile = ~/.config/git/ignore
+	autocrlf = input
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	required = true
+	process = git-lfs filter-process
+[url "https://git.kernel.org/pub/scm/"]
+	insteadof = ko:
+[url "ssh://git.launchpad.net/"]
+	insteadof = lp:
+[url "ssh://git.launchpad.net/~larsks/"]
+	insteadof = lpme:
+[url "ssh://git@gitlab.com/"]
+	insteadof = gl:
+[url "ssh://git@gitlab.com/larsks/"]
+	insteadof = glme:
+[url "ssh://git@github.com/"]
+	insteadof = gh:
+[url "ssh://git@github.com/operate-first/"]
+	insteadof = opf:
+[url "ssh://git@github.com/larsks/"]
+	insteadof = me:
+[url "ssh://git@bitbucket.org/"]
+	insteadof = bb:
+[url "git://git.openstack.org/openstack/"]
+	insteadof = os:
+[url "git://pkgs.fedoraproject.org/rpms/"]
+	insteadof = fedpkg:
+[url "ssh://git@github.com/CCI-MOC/"]
+	insteadof = moc:
+[rebase]
+	autosquash = true
+[pull]
+	rebase = true
+[stgit "alias"]
+	publish = git prom
+	list = stg series
+	ls = stg series
+[advice]
+	detachedHead = false
+[init]
+	defaultBranch = master
+[blame]
+	showEmail = true
