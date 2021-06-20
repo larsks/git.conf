@@ -21,6 +21,7 @@
 	msg = show -s --format=%B
 	sync = push -u origin HEAD
 	body = show --quiet --format=%B
+	since = !sh -c 'git hist --oneline "$1"..' --
 [user]
 	name = Lars Kellogg-Stedman
 	useConfigOnly = true
